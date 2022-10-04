@@ -17,11 +17,9 @@
 					<div class="guide-card bg-white ms-auto p-4">
 						<h6 class="fw-bold mb-3">Editor / Writer / Shutterbug</h6>
 						<small>
-							我是說明文字 <br />
-							我是說明文字 <br />
-							我是說明文字 <br />
-							我是說明文字 <br />
-							我是說明文字
+							Born｜1989.01.07 <br />
+							Hometown｜Taipei <br />
+							Residence｜New Taipei City
 						</small>
 					</div>
 				</div>
