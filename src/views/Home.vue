@@ -15,8 +15,11 @@
 				</div>
 				<div class="col-5">
 					<div class="guide-card bg-white ms-auto p-4">
-						<h6 class="fw-bold mb-3">Editor / Writer / Shutterbug</h6>
-						<small>
+						<h4 class="title d-inline-block lh-lg me-3">關於我</h4>
+						<h5 class="subtitle mb-3">about</h5>
+						<small class="d-block lh-lg">
+							<span class="name fw-bold">Daniel Chang 張景棠</span> <br />
+							Editor - Writer - Shutterbug <br />
 							Born｜1989.01.07 <br />
 							Hometown｜Taipei <br />
 							Residence｜New Taipei City
@@ -25,12 +28,12 @@
 				</div>
 			</div>
 		</div>
-		<!-- about -->
-		<div id="about" class="about-content row gx-5 mx-auto pb-5">
+		<!-- experience -->
+		<div id="experience" class="experience-content row gx-5 mx-auto pb-5">
 			<div class="col-sm-8">
 				<div class="mb-5">
-					<h2 class="title d-inline-block lh-lg me-4">關於我</h2>
-					<h4 class="subtitle">about</h4>
+					<h2 class="title d-inline-block me-4">工作經歷</h2>
+					<h4 class="subtitle">experience</h4>
 				</div>
 				<ul class="lh-lg">
 					<li v-for="(item, index) in experience" :key="`experience_${index}`" class="mt-3">
@@ -63,7 +66,7 @@
 		<div id="work" class="work-content pt-5">
 			<div v-for="work in works" :key="work.id" class="work pb-5">
 				<h3 class="mb-5">
-					{{ work.id }}
+					<span class="title">{{ work.id }}</span>
 					<small class="subtitle fs-6 ms-3 fw-normal">{{ work.title }}</small>
 				</h3>
 				<ul class="row">
@@ -219,9 +222,6 @@ export default {
 			object-fit: cover;
 		}
 	}
-	.title {
-		letter-spacing: 2rem;
-	}
 	.subtitle {
 		position: relative;
 		display: inline-block;
@@ -258,9 +258,18 @@ export default {
 	}
 	.guide-card {
 		margin-top: -50px;
+		.title {
+			letter-spacing: 1rem;
+			.name {
+				font-size: 14px;
+			}
+		}
 	}
-	.about-content {
+	.experience-content {
 		max-width: 1000px;
+		.title {
+			letter-spacing: 2rem;
+		}
 		.image-wrap {
 			padding-top: 100%;
 			background-image: url('~@/assets/image/avatar.jpg');

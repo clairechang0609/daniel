@@ -22,8 +22,8 @@ export default {
 		return {
 			menuList: [
 				{
-					id: 'about',
-					name: 'about'
+					id: 'experience',
+					name: 'experience'
 				},
 				{
 					id: 'work',
