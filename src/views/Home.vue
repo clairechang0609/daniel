@@ -63,16 +63,20 @@
 		</div>
 		<!-- works -->
 		<div id="work" class="work-content pt-5">
-			<div v-for="workItem in works" :key="workItem.id" class="work-item pb-5">
+			<div v-for="work in works" :key="work.id" class="work pb-5">
 				<h3 class="mb-5">
-					{{ workItem.id }}
-					<small class="subtitle fs-6 ms-3 fw-normal">{{ workItem.title }}</small>
+					{{ work.id }}
+					<small class="subtitle fs-6 ms-3 fw-normal">{{ work.title }}</small>
 				</h3>
 				<ul class="row">
-					<li v-for="(item, key) in workItem.collections" :key="`${workItem.id}_${key}`"
+					<li v-for="item in work.collections" :key="`work_${work.id}_${ item.id}`"
 						class="col-md-6 col-lg-4 mb-4">
-						<small class="d-block fw-bold mb-3">{{ item.date }} ｜ {{ item.title }}</small>
-						<div class="image-wrap bg-light mb-3"></div>
+						<router-link :to="`work/${work.id}/${item.id}`" class="work-item">
+							<small class="d-block fw-bold mb-3">{{ item.date }} ｜ {{ item.title }}</small>
+							<div class="image-wrap position-relative bg-light mb-3">
+								<img :src="getImageUrl(work.id, item.image)" alt="item.title" class="image position-absolute">
+							</div>
+						</router-link>
 					</li>
 				</ul>
 			</div>
@@ -102,12 +106,16 @@ export default {
 					title: '旅行',
 					collections: [
 						{
+							id: 1,
 							date: '2022 夏季號',
-							title: 'tigertales 台灣虎航機上誌'
+							title: 'tigertales 台灣虎航機上誌',
+							image: 'Hokkaido01.png'
 						},
 						{
+							id: 2,
 							date: '2021 春季號',
-							title: 'tigertales 台灣虎航機上誌'
+							title: 'tigertales 台灣虎航機上誌',
+							image: 'Hokkaido01.png'
 						}
 					]
 				},
@@ -116,20 +124,22 @@ export default {
 					title: '人物',
 					collections: [
 						{
+							id: 1,
 							date: '2022.06',
-							title: 'Infinite 台新無限季刊'
+							title: 'Infinite 台新無限季刊',
+							image: 'dancer01.png'
 						},
 						{
+							id: 2,
 							date: '2021.08',
-							title: 'Infinite 台新無限季刊'
+							title: 'Infinite 台新無限季刊',
+							image: 'Flower01.png'
 						},
 						{
+							id: 3,
 							date: '2021.06',
-							title: 'Infinite 台新無限季刊'
-						},
-						{
-							date: '2020.11',
-							title: 'Infinite 台新無限季刊'
+							title: 'Infinite 台新無限季刊',
+							image: 'Reach01.png'
 						}
 					]
 				}
@@ -183,13 +193,16 @@ export default {
 		window.removeEventListener('scroll', this.showElement);
 	},
 	methods: {
-		showElement() {
-			const workItems = document.querySelectorAll('.work-item');
+		showElement() { // 顯示內容動態效果
+			const workItems = document.querySelectorAll('.work');
 			workItems.forEach(item => {
 				if ((item.offsetTop + 50) < (window.scrollY + window.innerHeight)) {
 					item.classList.add('active');
 				}
 			});
+		},
+		getImageUrl(category, image) { // 取得圖片路徑
+			return require(`@/assets/image/${category}/${image}`);
 		}
 	}
 };
@@ -257,13 +270,49 @@ export default {
 		}
 	}
 	.work-content {
-		.image-wrap {
-			padding-top: 75%;
-		}
-		.work-item {
+		.work {
 			&.active {
 				animation: fadeInLeft;
 				animation-duration: 1.5s;
+			}
+		}
+		.work-item {
+			overflow: hidden;
+			transition: 0.8s;
+			&:hover {
+				opacity: 0.6;
+				.image {
+					width: 82.5%;
+				}
+			}
+			.image-wrap {
+				padding-top: 75%;
+				&::before, &::after {
+					z-index: -1;
+					position: absolute;
+					content: '';
+					bottom: 15px;
+					left: 10px;
+					width: 50%;
+					top: 80%;
+					max-width:300px;
+					background: rgba($black, 0.45);
+					box-shadow: 0 15px 10px rgba($black, 0.45);
+					transform: rotate(-3deg);
+				}
+				&::after {
+					transform: rotate(3deg);
+					right: 10px;
+					left: auto;
+				}
+			}
+			.image {
+				width: 75%;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				box-shadow: 0 0.35rem 0.35rem -0.25rem rgba($black, 0.15);
+				transition: 0.8s;
 			}
 		}
 	}

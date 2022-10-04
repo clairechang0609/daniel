@@ -12,7 +12,7 @@ const routes = [
 			},
 			{
 				name: 'Work',
-				path: 'work/:id',
+				path: 'work/:category/:id',
 				component: () => import('@/views/Work')
 			}
 		]
