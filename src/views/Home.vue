@@ -1,9 +1,9 @@
 <template>
 	<div class="home-wrap">
 		<div class="carousel-wrap mx-auto mb-5">
-			<div id="carousel" class="carousel slide animate__animated animate__jello bg-light mb-2" data-bs-ride="carousel">
+			<div id="carousel" class="carousel slide animate__animated animate__jello animate__delay-1s bg-light mb-2" data-bs-ride="carousel">
 				<div class="carousel-inner">
-					<div class="carousel-item" data-bs-interval="3000" v-for="(item, key) in banner" :key="`banner_${key}`"
+					<div class="carousel-item bg-light" data-bs-interval="3000" v-for="(item, key) in banner" :key="`banner_${key}`"
 						:class="{ 'active': !key }">
 						<img src="@/assets/image/banner/banner-1.jpg" alt="banner" class="banner">
 					</div>
@@ -28,12 +28,12 @@
 			</div>
 		</div>
 		<!-- about -->
-		<div id="about" class="about-content row gx-5 mx-auto py-5">
-			<div class="col-sm-7">
-				<h2 class="title lh-lg mb-4">
-					關於我
-				</h2>
-				<h4 class="subtitle mb-5">about</h4>
+		<div id="about" class="about-content row gx-5 mx-auto pb-5">
+			<div class="col-sm-8">
+				<div class="mb-5">
+					<h2 class="title d-inline-block lh-lg me-4">關於我</h2>
+					<h4 class="subtitle">about</h4>
+				</div>
 				<ul class="lh-lg">
 					<li v-for="(item, index) in experience" :key="`experience_${index}`" class="mt-3">
 						<p class="fw-bold">
@@ -44,26 +44,26 @@
 								</small>
 							</template>
 						</p>
-						<div class="d-flex flex-column ms-2 mt-2">
+						<div class="d-flex flex-column ms-3 mt-2">
 							<small v-for="(publishItem, key) in item.publish" :key="`publish_${index}_${key}`" class="mt-1">
 								- {{ publishItem }}
 							</small>
 						</div>
 					</li>
 				</ul>
-				<!-- <div class="text-end">
-					<a href="#" class="small-link ms-auto py-1 pe-3">
-						profile >
-					</a>
-				</div> -->
 			</div>
-			<div class="col-sm-5 align-self-end">
+			<div class="col-sm-4 align-self-end">
+				<div class="text-end mb-4">
+					<a href="#" class="profile-link ms-auto py-1">
+						profile<i class="bi bi-arrow-right ms-1"></i>
+					</a>
+				</div>
 				<div class="image-wrap bg-light"></div>
 			</div>
 		</div>
 		<!-- works -->
 		<div id="work" class="work-content pt-5">
-			<div v-for="workItem in works" :key="workItem.id" class="pb-5">
+			<div v-for="workItem in works" :key="workItem.id" class="work-item pb-5">
 				<h3 class="mb-5">
 					{{ workItem.id }}
 					<small class="subtitle fs-6 ms-3 fw-normal">{{ workItem.title }}</small>
@@ -177,8 +177,20 @@ export default {
 		};
 	},
 	mounted() {
+		window.addEventListener('scroll', this.showElement, true);
+	},
+	beforeUnmount() {
+		window.removeEventListener('scroll', this.showElement);
 	},
 	methods: {
+		showElement() {
+			const workItems = document.querySelectorAll('.work-item');
+			workItems.forEach(item => {
+				if ((item.offsetTop + 50) < (window.scrollY + window.innerHeight)) {
+					item.classList.add('active');
+				}
+			});
+		}
 	}
 };
 </script>
@@ -213,14 +225,14 @@ export default {
 			transform: translateY(-50%);
 		}
 	}
-	.small-link {
+	.profile-link {
 		font-size: 14px;
 		position: relative;
 		&::before {
 			content: '';
 			position: absolute;
 			background: currentColor;
-			width: calc(100% - 1rem);
+			width: 100%;
 			height: 1px;
 			left: 0;
 			bottom: 0;
@@ -229,7 +241,7 @@ export default {
 		&:hover {
 			opacity: 0.75;
 			&::before {
-				width: 100%;
+				width: calc(100% + 1rem);
 			}
 		}
 	}
@@ -247,6 +259,12 @@ export default {
 	.work-content {
 		.image-wrap {
 			padding-top: 75%;
+		}
+		.work-item {
+			&.active {
+				animation: fadeInLeft;
+				animation-duration: 1.5s;
+			}
 		}
 	}
 </style>

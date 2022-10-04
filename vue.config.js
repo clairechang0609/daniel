@@ -31,15 +31,8 @@ module.exports = {
 				'@layout': path.resolve(__dirname, './src/layout'),
 				'@router': path.resolve(__dirname, './src/router'),
 				'@store': path.resolve(__dirname, './src/store'),
-				'@views': path.resolve(__dirname, './src/views'),
-				jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery')
+				'@views': path.resolve(__dirname, './src/views')
 			}
-		},
-		plugins: [
-			new webpack.ProvidePlugin({
-				jQuery: 'jquery',
-				'window.jQuery': 'jquery'
-			})
-		]
+		}
 	}
 };
