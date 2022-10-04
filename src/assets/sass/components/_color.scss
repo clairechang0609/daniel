@@ -8,9 +8,9 @@ $gray-600: #9B9893 !default;
 $gray-700: #707070 !default;
 $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
-$black: #000400 !default;
+$black: #000000 !default;
 
-$primary: #03438D !default;
+$primary: $black !default;
 $secondary: #EEC32A !default;
 $success: #83C51D !default;
 $danger: #F57375 !default;

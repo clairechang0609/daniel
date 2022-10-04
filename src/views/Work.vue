@@ -32,11 +32,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-// const ws = new WebSocket('wss://peaceful-citadel-43202.herokuapp.com/websockets');
-
 export default {
-	name: 'AddPost',
+	name: 'Work',
 	data() {
 		return {
 			info: {
@@ -48,80 +45,9 @@ export default {
 			isLoading: false
 		};
 	},
-	computed: {
-		...mapState({
-			token: state => state.token
-		})
-	},
 	mounted() {
-		// ws.onopen = () => console.log('WebSocket 服務已連接');
-		// ws.onclose = () => console.log('WebSocket 伺服器關閉');
 	},
 	methods: {
-		getPreviewFile() { // 預覽圖片
-			const input = this.$refs['upload-file'];
-			this.imagePreview = URL.createObjectURL(input.files[0]);
-		},
-		uploadFile() { // 上傳檔案到 aws s3
-			return new Promise((resolve, reject) => {
-				const input = this.$refs['upload-file'];
-				const data = new FormData();
-				data.append('image', input.files[0]);
-				input.files = new DataTransfer().files; // 清空 input，避免重複選同一檔案無法觸發 change 事件
-
-				const config = {
-					method: 'POST',
-					url: `${process.env.VUE_APP_APIPATH}/api/v1/file`,
-					headers: {
-						authorization: `Bearer ${this.token}`
-					},
-					data: data
-				};
-				this.$http(config)
-					.then(response => {
-						this.info.image = response.data.data;
-						resolve();
-					})
-					.catch(error => {
-						reject(error.response.data.message);
-					});
-			});
-		},
-		uploadPost() {
-			return new Promise((resolve, reject) => {
-				const config = {
-					method: 'POST',
-					url: `${process.env.VUE_APP_APIPATH}/api/v1/post`,
-					headers: {
-						authorization: `Bearer ${this.token}`
-					},
-					data: this.info
-				};
-				this.$http(config)
-					.then(response => {
-						this.$router.push({ name: 'Home' });
-						resolve(response.data.data);
-					})
-					.catch(error => {
-						reject(error.response.data.message);
-					});
-			});
-		},
-		async submitPost() {
-			try {
-				this.isLoading = true;
-				if (this.imagePreview) {
-					await this.uploadFile(); // 先上傳圖片
-				}
-				await this.uploadPost(); // 接著上傳貼文
-				// const response = await this.uploadPost(); // 接著上傳貼文
-				// await ws.send(JSON.stringify(response)); // 更新貼文
-				this.isLoading = false;
-			} catch (error) {
-				this.errorMessage = error;
-				this.isLoading = false;
-			}
-		}
 	}
 };
 </script>

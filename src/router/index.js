@@ -26,10 +26,15 @@ const routes = [
 
 const router = createRouter({
 	history: createWebHashHistory(),
-	routes
+	routes,
+	scrollBehavior(to, from, savedPosition) { // 頁面滾動效果
+		if (to.hash) {
+			return {
+				el: to.hash,
+				behavior: 'smooth'
+			};
+		}
+	}
 });
-
-// 路由跳轉前
-router.beforeEach(async (to, from, next) => {});
 
 export default router;

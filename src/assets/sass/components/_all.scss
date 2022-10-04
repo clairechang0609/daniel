@@ -1,38 +1,23 @@
-// heading
-h1, h2, h3, h4, h5, h6, p {
-    margin-bottom: 0;
-}
-h1 {
-    font-size: 30px;
-}
-h2 {
-    font-size: 24px;
-}
-h3 {
-    font-size: 20px;
-}
-h4 {
-    font-size: 18px;
-}
-h5 {
-    font-size: 1rem;
-}
-small, .small {
-    font-size: 14px;
-}
-
 body {
-    font-family: Helvetica, 'Noto Sans TC', sans-serif;
-    background-color: $light;
-    background-image: 
-        linear-gradient($gray-400 1px, transparent 0),
-        linear-gradient(90deg, $gray-400 1px, transparent 0);
-    background-size: 
-        60px 60px,
-        60px 60px;
+    font-family: 'Poppins', 'Noto Sans TC', sans-serif;
     // 字體平滑
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.15rem;
+    color: $primary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+small {
+    font-size: 0.75rem;
 }
 
 ul {
@@ -44,13 +29,10 @@ ul {
 }
 
 a {
-    color: $black;
     text-decoration: none;
-    &:hover {
-        color: $primary;
-        text-decoration: underline
-    }
 }
+
+
 
 // card
 .card {

@@ -1,21 +1,30 @@
 $border-radius: 0.5rem !default;
-$navbar-height: 60px !default;
-$border-width: 2px !default;
+$navbar-height: 100px !default;
+$border-width: 1px !default;
 $border-color: $black !default;
-
-@mixin metawall-logo {
-    font-family: 'Paytone One', sans-serif;
-}
+$container-width: 1200px !default;
 
 @mixin custom-border {
     border: $border-width solid $border-color;
 }
 
-@mixin window-width {
-    max-width: 870px;
-    margin-left: auto;
-    margin-right: auto;
-    @include media-lg {
-        min-width: 870px;
+@mixin container-setting {
+    max-width: $container-width;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    @include media-md {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
     }
+    @media screen and (min-width: calc(1200px + 3rem)) {
+		margin-left: auto;
+        margin-right: auto;
+	}
+}
+
+// 背景圖片
+@mixin backgroundImage {
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }

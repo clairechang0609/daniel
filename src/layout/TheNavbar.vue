@@ -1,62 +1,58 @@
 <template>
-	<nav class="navbar fixed-top px-3 bg-white border-bottom">
-		<div class="navbar-content d-flex align-items-center justify-content-between w-100 h-100">
-			<h1 class="logo">
-				<router-link :to="{ name: 'Home' }" title="Daniel Portfolio">
+	<nav class="navbar fixed-top px-3 bg-white" ref="navbar">
+		<div class="navbar-content d-flex align-items-center justify-content-between w-100 h-100 mx-auto">
+			<h1 class="logo px-4 mt-4" ref="logo">
+				<router-link :to="{ name: 'Home' }" title="Daniel Portfolio" class="h-100">
 					Daniel Portfolio
 				</router-link>
 			</h1>
-			<div class="nav-item dropdown">
-				<div class="nav-link dropdown-toggle d-flex align-items-center pe-0"
-					id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					<img :src="info.photo" alt="head" class="head d-block me-2 border rounded-circle" v-if="info.photo">
-					<div class="head rounded-circle border me-2 d-flex align-items-center justify-content-center flex-shrink-0 text-black" v-else>
-						<i class="bi bi-person fs-6"></i>
-					</div>
-					<a href="#" class="border-bottom p-0 fw-bold text-black text-decoration-none">{{ info.name }}</a>
-				</div>
-				<ul class="dropdown-menu dropdown-menu-end rounded-0 p-0 text-center" aria-labelledby="navbarDropdown">
-					<li v-if="info._id">
-						<router-link :to="{ name: 'PersonalPage', params: { id: info._id } }" class="dropdown-item text-decoration-none py-2 border-bottom">
-							我的貼文牆
-						</router-link>
-					</li>
-					<li>
-						<router-link :to="{ name: 'Account' }" class="dropdown-item text-decoration-none py-2 border-bottom">
-							修改個人資料
-						</router-link>
-					</li>
-					<li>
-						<button type="button" class="dropdown-item text-decoration-none py-2" @click="logout()">
-							登出
-						</button>
-					</li>
-				</ul>
-			</div>
+			<ul class="menu">
+				<li class="px-3" v-for="item in menuList" :key="item.id">
+					<router-link :to="{ hash: `#${item.id}` }" class="menu-item position-relative fw-bold text-decoration-none py-2">{{ item.name }}</router-link>
+				</li>
+			</ul>
 		</div>
 	</nav>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
-
 export default {
 	name: 'Navbar',
 	data() {
-		return {};
-	},
-	computed: {
-		...mapState({
-			info: state => state.info
-		})
+		return {
+			menuList: [
+				{
+					id: 'about',
+					name: 'about'
+				},
+				{
+					id: 'work',
+					name: 'work'
+				},
+				{
+					id: 'contact',
+					name: 'contact'
+				}
+			]
+		};
 	},
 	mounted() {
+		this.$nextTick(() => {
+			window.addEventListener('scroll', this.changeMenuHeight);
+		});
+	},
+	beforeUnmount() {
+		window.removeEventListener('scroll', this.changeMenuHeight);
 	},
 	methods: {
-		...mapMutations([ 'setInfo', 'setToken' ]),
-		logout() {
-			this.setToken();
-			this.$router.push({ name: 'Login' });
+		changeMenuHeight() { // 電腦版切換 side-menu z-index（當錨點按鈕置頂時，side-menu置於按鈕下層，反之置於上層)
+			if (window.scrollY >= 50) {
+				this.$refs.navbar.style.height = '60px';
+				this.$refs.logo.style.height = '60px';
+			} else {
+				this.$refs.navbar.style.height = '100px';
+				this.$refs.logo.style.height = '100px';
+			}
 		}
 	}
 };
@@ -65,28 +61,53 @@ export default {
 <style lang="scss" scoped>
 	.navbar {
 		height: $navbar-height;
+		transition: 0.3s ease-in-out;
 		.navbar-content {
-			@include window-width;
-		}
-		.nav-link {
-			&::after {
-				display: none
-			}
-			.head {
-				width: 30px;
-				height: 30px;
-				background-color: #E2EDFA;
-			}
+			max-width: $container-width;
 		}
 		.logo {
+			height: 100px;
+			transition: 0.3s ease-in-out;
 			a {
 				display: block;
-				background: url(@/assets/image/logo.svg) no-repeat;
-				width: 174px;
-				height: 56px;
+				background: url('~@/assets/image/logo.svg') no-repeat;
 				text-indent: 101%;
 				overflow: hidden;
 				white-space: nowrap;
+			}
+		}
+		.menu {
+			position: absolute;
+			top: $navbar-height;
+			left: 0;
+			width: 100%;
+			max-height: calc(100vh - $navbar-height);
+			overflow: auto;
+			@include media-md {
+				position: static;
+				top: 0;
+				display: flex;
+				width: auto;
+				max-height: none;
+				overflow: visible;
+			}
+		}
+		.menu-item {
+			&::before {
+				content: '';
+				position: absolute;
+				background-color: currentColor;
+				width: 0;
+				height: 0;
+				left: 0;
+				bottom: 2px;
+				transition: width 0.3s ease-out;
+			}
+			&:hover {
+				&::before {
+					width: 100%;
+					height: 1px;
+				}
 			}
 		}
 	}
