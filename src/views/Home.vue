@@ -1,20 +1,20 @@
 <template>
 	<div class="home-wrap">
-		<div class="carousel-wrap mx-auto mb-5">
+		<div class="carousel-wrap mx-auto">
 			<div id="carousel" class="carousel slide animate__animated animate__jello animate__delay-1s bg-light mb-2" data-bs-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item bg-light" data-bs-interval="3000" v-for="(item, key) in banner" :key="`banner_${key}`"
 						:class="{ 'active': !key }">
-						<img src="@/assets/image/banner/banner-1.jpg" alt="banner" class="banner">
+						<img :src="getImageUrl('banner', item)" alt="banner" class="banner">
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row gx-5">
 				<div class="col-7">
-					<small>some descriptions to introduce this pictures</small>
+					<small>我們不只是用相機拍照。我們帶到攝影中的是所有我們讀過的書、看過的電影、聽過的音樂、愛過的人。 — Ansel Adams</small>
 				</div>
 				<div class="col-5">
-					<div class="guide-card bg-white ms-auto p-4">
+					<div class="guide-card bg-white ms-auto py-4 px-5">
 						<h4 class="title d-inline-block lh-lg me-3">關於我</h4>
 						<h5 class="subtitle mb-3">about</h5>
 						<small class="d-block lh-lg">
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<!-- experience -->
-		<div id="experience" class="experience-content row gx-5 mx-auto pb-5">
+		<div id="experience" class="experience-content row gx-5 mx-auto py-5">
 			<div class="col-sm-8">
 				<div class="mb-5">
 					<h2 class="title d-inline-block me-4">工作經歷</h2>
@@ -54,24 +54,24 @@
 				</ul>
 			</div>
 			<div class="col-sm-4 align-self-end">
-				<div class="text-end mb-4">
+				<div class="image-wrap bg-light mb-4"></div>
+				<div class="text-end mb-2">
 					<a href="#" class="profile-link ms-auto py-1">
 						profile<i class="bi bi-arrow-right ms-1"></i>
 					</a>
 				</div>
-				<div class="image-wrap bg-light"></div>
 			</div>
 		</div>
 		<!-- works -->
 		<div id="work" class="work-content pt-5">
-			<div v-for="work in works" :key="work.id" class="work pb-5">
-				<h3 class="mb-5">
+			<div v-for="work in works" :key="work.id" class="work-wrap pb-5">
+				<h3 class="mb-5 work">
 					<span class="title">{{ work.id }}</span>
 					<small class="subtitle fs-6 ms-3 fw-normal">{{ work.title }}</small>
 				</h3>
 				<ul class="row">
 					<li v-for="item in work.collections" :key="`work_${work.id}_${ item.id}`"
-						class="col-md-6 col-lg-4 mb-4">
+						class="work col-md-6 col-lg-4 mb-4">
 						<router-link :to="`work/${work.id}/${item.id}`" class="work-item">
 							<small class="d-block fw-bold mb-3">{{ item.date }} ｜ {{ item.title }}</small>
 							<div class="image-wrap position-relative bg-light mb-3">
@@ -81,6 +81,12 @@
 					</li>
 				</ul>
 			</div>
+		</div>
+		<!-- contact -->
+		<div id="contact" class="contact-content bg-light bg-opacity-50 text-center position-relative mx-auto mt-5 p-5">
+			<h3 class="title position-absolute">contact</h3>
+			<p class="mb-2">專題企劃、採訪撰稿歡迎來信<i class="bi bi-envelope ms-1"></i></p>
+			<a href="mailto:danielchang0281@gmail.com" class="email" target="_blank" rel="noreferrer noopener">danielchang0281@gmail.com</a>
 		</div>
 	</div>
 </template>
@@ -99,53 +105,187 @@ export default {
 				'banner-1.jpg',
 				'banner-2.jpg',
 				'banner-3.jpg',
-				'banner-4.jpg'
+				'banner-4.jpg',
+				'banner-5.jpg',
+				'banner-6.jpg'
 			],
-			works: [
+			works: [ // 作品
+				{
+					id: 'people',
+					title: ' 人物',
+					collections: [
+						{
+							id: 1,
+							date: '2019 冬季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'dancer01.png'
+						},
+						{
+							id: 2,
+							date: '2020 秋季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'Flower01.png'
+						},
+						{
+							id: 3,
+							date: '2020 春季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'tiger01.png'
+						},
+						{
+							id: 4,
+							date: '2021 冬季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'Louisa01.png'
+						},
+						{
+							id: 5,
+							date: '2021 夏季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'Atitan01.png'
+						},
+						{
+							id: 6,
+							date: '2020 冬季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'Celia01.png'
+						},
+						{
+							id: 7,
+							date: '2022 秋季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'PoChen01.png'
+						},
+						{
+							id: 8,
+							date: '2022 夏季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'Reach01.png'
+						}
+					]
+				},
+				{
+					id: 'features',
+					title: '專題',
+					collections: [
+						{
+							id: 1,
+							date: '2022 秋季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'Handmade01.png'
+						},
+						{
+							id: 2,
+							date: '2022 春季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'TWclture01.png'
+						},
+						{
+							id: 3,
+							date: '2021 夏季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'Local01.png'
+						}
+					]
+				},
 				{
 					id: 'travel',
 					title: '旅行',
 					collections: [
 						{
 							id: 1,
-							date: '2022 夏季號',
-							title: 'tigertales 台灣虎航機上誌',
+							date: '2020 1月號',
+							title: 'Ciao 潮旅',
 							image: 'Hokkaido01.png'
 						},
 						{
 							id: 2,
-							date: '2021 春季號',
-							title: 'tigertales 台灣虎航機上誌',
-							image: 'Hokkaido01.png'
+							date: '2019 7月號',
+							title: 'Ciao 潮旅',
+							image: 'Scotland01.png'
+						},
+						{
+							id: 3,
+							date: '2020 秋季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'Island01.png'
+						},
+						{
+							id: 4,
+							date: '2020 4月號',
+							title: 'Ciao 潮旅',
+							image: 'Old01.png'
+						},
+						{
+							id: 5,
+							date: '2020 3月號',
+							title: 'Ciao 潮旅',
+							image: 'CityArch01.png'
+						},
+						{
+							id: 6,
+							date: '2021 Vol.08',
+							title: 'terroir 肥沃台灣',
+							image: 'Sea01.png'
 						}
 					]
 				},
 				{
-					id: 'people',
-					title: '人物',
+					id: 'collection',
+					title: '收藏',
 					collections: [
 						{
 							id: 1,
-							date: '2022.06',
+							date: '2021 冬季號',
 							title: 'Infinite 台新無限季刊',
-							image: 'dancer01.png'
+							image: 'collect01.png'
 						},
 						{
 							id: 2,
-							date: '2021.08',
-							title: 'Infinite 台新無限季刊',
-							image: 'Flower01.png'
+							date: '2021 1月號',
+							title: '合庫樂活理財季刊',
+							image: 'poster01.png'
 						},
 						{
 							id: 3,
-							date: '2021.06',
+							date: '2020 7季號',
+							title: '合庫樂活理財季刊',
+							image: 'Chimei01.png'
+						},
+						{
+							id: 4,
+							date: '2019 10月號',
+							title: '合庫樂活理財季刊',
+							image: 'coffeejoe01.png'
+						}
+					]
+				},
+				{
+					id: 'architecture',
+					title: '建築',
+					collections: [
+						{
+							id: 1,
+							date: '2022 夏季號',
 							title: 'Infinite 台新無限季刊',
-							image: 'Reach01.png'
+							image: 'Home01.png'
+						},
+						{
+							id: 2,
+							date: '2021 秋季號',
+							title: 'Infinite 台新無限季刊',
+							image: 'texture01.png'
+						},
+						{
+							id: 3,
+							date: '2019 1月號',
+							title: 'Core Interior 空間',
+							image: 'TPAC01.png'
 						}
 					]
 				}
 			],
-			experience: [
+			experience: [ // 經歷
 				{
 					during: '2019-now',
 					company: '華訊事業股份有限公司',
@@ -277,6 +417,9 @@ export default {
 		}
 	}
 	.work-content {
+		.title {
+			letter-spacing: 0.5rem;
+		}
 		.work {
 			&.active {
 				animation: fadeInLeft;
@@ -289,7 +432,7 @@ export default {
 			&:hover {
 				opacity: 0.6;
 				.image {
-					width: 82.5%;
+					width: 87.5%;
 				}
 			}
 			.image-wrap {
@@ -302,7 +445,7 @@ export default {
 					left: 10px;
 					width: 50%;
 					top: 80%;
-					max-width:300px;
+					max-width: 300px;
 					background: rgba($black, 0.45);
 					box-shadow: 0 15px 10px rgba($black, 0.45);
 					transform: rotate(-3deg);
@@ -318,8 +461,23 @@ export default {
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
-				box-shadow: 0 0.35rem 0.35rem -0.25rem rgba($black, 0.15);
+				box-shadow: 0 0.35rem 0.35rem -0.25rem rgba($black, 0.2);
 				transition: 0.8s;
+			}
+		}
+	}
+	.contact-content {
+		max-width: 750px;
+		.title {
+			letter-spacing: 0.5rem;
+			top: -1.5rem;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+		.email {
+			font-size: 14px;
+			&:hover {
+				opacity: 0.6;
 			}
 		}
 	}

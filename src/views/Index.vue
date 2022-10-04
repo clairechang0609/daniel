@@ -4,6 +4,9 @@
 		<div class="content">
 			<router-view></router-view>
 		</div>
+		<div class="footer text-center border-top border-dark py-5">
+			<small>Copyright © daniel 2022, All rights reserved.</small>
+		</div>
 	</div>
 </template>
 
@@ -24,7 +27,13 @@ export default {
 <style lang="scss" scoped>
 	.content {
 		@include container-setting;
-		margin-top: $navbar-height;
+		margin-top: $navbar-height-mobile;
 		margin-bottom: 4rem;
+		@include media-md {
+			margin-top: $navbar-height;
+		}
+	}
+	.footer {
+		@include container-setting;
 	}
 </style>

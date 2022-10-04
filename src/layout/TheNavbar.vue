@@ -1,12 +1,12 @@
 <template>
 	<nav class="navbar fixed-top px-3 bg-white" ref="navbar">
 		<div class="navbar-content d-flex align-items-center justify-content-between w-100 h-100 mx-auto">
-			<h1 class="logo px-4 mt-4" ref="logo">
+			<h1 class="logo px-5 mt-4" ref="logo">
 				<router-link :to="{ name: 'Home' }" title="Daniel Portfolio" class="h-100">
 					Daniel Portfolio
 				</router-link>
 			</h1>
-			<ul class="menu">
+			<ul class="menu bg-white">
 				<li class="px-3" v-for="item in menuList" :key="item.id">
 					<router-link :to="{ hash: `#${item.id}` }" class="menu-item position-relative fw-bold text-decoration-none py-2">{{ item.name }}</router-link>
 				</li>
@@ -46,6 +46,9 @@ export default {
 	},
 	methods: {
 		changeMenuHeight() { // 電腦版切換 side-menu z-index（當錨點按鈕置頂時，side-menu置於按鈕下層，反之置於上層)
+			if (window.screen.width < 768) {
+				return;
+			}
 			if (window.scrollY >= 50) {
 				this.$refs.navbar.style.height = '60px';
 				this.$refs.logo.style.height = '60px';
@@ -60,14 +63,21 @@ export default {
 
 <style lang="scss" scoped>
 	.navbar {
-		height: $navbar-height;
+		height: $navbar-height-mobile;
 		transition: 0.3s ease-in-out;
+		@include media-md {
+			height: $navbar-height;
+		}
 		.navbar-content {
 			max-width: $container-width;
 		}
 		.logo {
-			height: 100px;
+			height: 80px;
+			filter: drop-shadow(3px 3px 0 $white);
 			transition: 0.3s ease-in-out;
+			@include media-md {
+				height: 100px;
+			}
 			a {
 				display: block;
 				background: url('~@/assets/image/logo.svg') no-repeat;
@@ -77,19 +87,11 @@ export default {
 			}
 		}
 		.menu {
-			position: absolute;
-			top: $navbar-height;
-			left: 0;
-			width: 100%;
-			max-height: calc(100vh - $navbar-height);
-			overflow: auto;
+			text-align: right;
+			font-size: 14px;
 			@include media-md {
-				position: static;
-				top: 0;
 				display: flex;
-				width: auto;
-				max-height: none;
-				overflow: visible;
+				font-size: 1rem;
 			}
 		}
 		.menu-item {
