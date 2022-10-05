@@ -1,11 +1,13 @@
 <template>
 	<div class="home-wrap">
 		<div class="carousel-wrap mx-auto">
-			<div id="carousel" class="carousel slide animate__animated animate__jello animate__delay-1s bg-light mb-2" data-bs-ride="carousel">
-				<div class="carousel-inner">
-					<div class="carousel-item bg-light" data-bs-interval="3000" v-for="(item, key) in banner" :key="`banner_${key}`"
-						:class="{ 'active': !key }">
-						<img :src="getImageUrl('banner', item)" alt="banner" class="banner">
+			<div class="animate__animated animate__jello animate__delay-1s">
+				<div id="carousel" class="carousel slide carousel-fade bg-light mb-2" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item bg-light" data-bs-interval="3000" v-for="(item, key) in banner" :key="`banner_${key}`"
+							:class="{ 'active': !key }">
+							<img :src="getImageUrl('banner', item)" alt="banner" class="banner">
+						</div>
 					</div>
 				</div>
 			</div>

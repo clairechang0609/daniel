@@ -31,6 +31,11 @@
 			<div class="image-example mb-4 bg-light w-100"></div>
 			<div class="image-example mb-4 bg-light w-100"></div>
 		</div>
+		<div>
+			<router-link :to="{ name: 'Home' }" class="fs-8">
+				<i class="bi bi-arrow-left me-1"></i>back home
+			</router-link>
+		</div>
 	</div>
 </template>
 
