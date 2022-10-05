@@ -18,7 +18,7 @@
 						<h4 class="title d-inline-block lh-lg me-3">關於我</h4>
 						<h5 class="subtitle mb-3">about</h5>
 						<small class="d-block lh-lg">
-							<span class="name fw-bold">Daniel Chang 張景棠</span> <br />
+							<span class="name fs-7 fw-bold">Daniel Chang 張景棠</span> <br />
 							Editor - Writer - Shutterbug <br />
 							Born｜1989.01.07 <br />
 							Hometown｜Taipei <br />
@@ -56,7 +56,7 @@
 			<div class="col-sm-4 align-self-end">
 				<div class="image-wrap bg-light mb-4"></div>
 				<div class="text-end mb-2">
-					<a href="#" class="profile-link ms-auto py-1">
+					<a href="#" class="profile-link fs-7 ms-auto py-1">
 						profile<i class="bi bi-arrow-right ms-1"></i>
 					</a>
 				</div>
@@ -86,7 +86,7 @@
 		<div id="contact" class="contact-content bg-light bg-opacity-50 text-center position-relative mx-auto mt-5 p-5">
 			<h3 class="title position-absolute">contact</h3>
 			<p class="mb-2">專題企劃、採訪撰稿歡迎來信<i class="bi bi-envelope ms-1"></i></p>
-			<a href="mailto:danielchang0281@gmail.com" class="email" target="_blank" rel="noreferrer noopener">danielchang0281@gmail.com</a>
+			<a href="mailto:danielchang0281@gmail.com" class="email fs-7" target="_blank" rel="noreferrer noopener">danielchang0281@gmail.com</a>
 		</div>
 	</div>
 </template>
@@ -377,7 +377,6 @@ export default {
 		}
 	}
 	.profile-link {
-		font-size: 14px;
 		position: relative;
 		&::before {
 			content: '';
@@ -400,9 +399,6 @@ export default {
 		margin-top: -50px;
 		.title {
 			letter-spacing: 1rem;
-			.name {
-				font-size: 14px;
-			}
 		}
 	}
 	.experience-content {
@@ -475,7 +471,6 @@ export default {
 			transform: translateX(-50%);
 		}
 		.email {
-			font-size: 14px;
 			&:hover {
 				opacity: 0.6;
 			}

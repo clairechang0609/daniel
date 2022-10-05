@@ -51,6 +51,13 @@
 // @import "~bootstrap/scss/offcanvas";
 // @import "~bootstrap/scss/placeholders";
 
+// bootstrap helpers
+@import "~bootstrap/scss/helpers";
+
+// bootstrap utilities
+@import "~bootstrap/scss/utilities/api";
+
+// animate
 @import "~animate.css/animate.css";
 
 // components

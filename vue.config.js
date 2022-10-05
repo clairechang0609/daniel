@@ -6,11 +6,16 @@ module.exports = {
 		? '/daniel'
 		: '/',
 	css: {
-		sourceMap: true,
-		loaderOptions: {
-			sass: {
-				prependData: '@import "@assets/sass/app.scss";'
-			}
+		sourceMap: true
+	},
+	pluginOptions: {
+		'style-resources-loader': {
+			'preProcessor': 'scss',
+			'patterns': [
+				path.resolve(__dirname, './src/assets/scss/components/_color.scss'),
+				path.resolve(__dirname, './src/assets/scss/components/_grid.scss'),
+				path.resolve(__dirname, './src/assets/scss/components/_mixin.scss')
+			]
 		}
 	},
 	chainWebpack: config => {

@@ -1,12 +1,35 @@
 <template>
-	<div class="work-wrap pt-5">
-		<div class="title-card p-4 mb-5">
-			<h5 class="title d-inline-block me-4">{{ $route.params.category }}</h5>
-			<p class="subtitle d-inline-block">{{ category.title }}</p>
+	<div class="work-wrap pt-5 mx-auto">
+		<div class="row gx-5">
+			<div class="col-md-6">
+				<div class="title-card h-100">
+					<div class="title-card-body p-3">
+						<h3 class="title">travel</h3>
+						<h5 class="subtitle position-relative d-inline-block fs-7">旅行</h5>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="work-content">
+					<small class="mb-2">2020 10月號</small>
+					<h4 class="mb-4">刊頭名稱</h4>
+					<p class="fs-7">
+						作者是誰：一些內容 <br /><br />
+						這是說明文字一段這是說明文字一段這是說明文字一段， <br />
+						說明文字二段說明文字二段說明文字二段，以上。 <br />
+					</p>
+				</div>
+			</div>
 		</div>
-		<div class="work-content mx-auto">
-			<h6>{{ collection?.subtitle }}</h6>
-			<h4>{{ collection?.title }}</h4>
+		<div class="image-content mt-5">
+			<div class="image-example mb-4 bg-light w-100"></div>
+			<div class="image-example mb-4 bg-light w-100"></div>
+			<div class="image-example mb-4 bg-light w-100"></div>
+			<div class="image-example mb-4 bg-light w-100"></div>
+			<div class="image-example mb-4 bg-light w-100"></div>
+			<div class="image-example mb-4 bg-light w-100"></div>
+			<div class="image-example mb-4 bg-light w-100"></div>
+			<div class="image-example mb-4 bg-light w-100"></div>
 		</div>
 	</div>
 </template>
@@ -36,7 +59,7 @@ export default {
 	},
 	computed: {
 		category() {
-			return this.data[this.$route.params.category];
+			return this.data[this.$route.params?.category];
 		},
 		collection() {
 			return this.category?.collection?.find(item => item.id === Number(this.$route.params.id));
@@ -50,13 +73,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	.work-wrap {
+		max-width: 1000px;
+	}
 	.title-card {
-		border: 5px solid $black;
+		border: 7px solid $black;
 	}
 	.subtitle {
-		font-size: 14px;
-		position: relative;
-		display: inline-block;
 		&::before {
 			content: '';
 			position: absolute;
@@ -68,7 +91,7 @@ export default {
 			transform: translateY(-50%);
 		}
 	}
-	.work-content {
-		max-width: 1000px;
+	.image-example {
+		padding-top: 75%;
 	}
 </style>

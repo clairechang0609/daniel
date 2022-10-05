@@ -12,7 +12,8 @@ $utilities: map-merge(
 						3: $h3-font-size,
 						4: $h4-font-size,
 						5: $h5-font-size,
-						6: $h6-font-size
+						6: $h6-font-size,
+						7: $font-size-sm
 					)
 				)
 			)
@@ -34,26 +35,6 @@ $utilities: map-merge(
 					gray-100: $gray-100
 				)
 			))
-		),
-		"border-top": map-merge(
-			map-get($utilities, "border-top"),
-			( responsive: true )
-		),
-		"border-end": map-merge(
-			map-get($utilities, "border-end"),
-			( responsive: true )
-		),
-		"border-bottom": map-merge(
-			map-get($utilities, "border-bottom"),
-			( responsive: true )
-		),
-		"border-start": map-merge(
-			map-get($utilities, "border-start"),
-			( responsive: true )
-		),
-		"border-color": map-merge(
-			map-get($utilities, "border-color"),
-			( responsive: true )
 		)
 	)
 );
