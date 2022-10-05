@@ -1,8 +1,8 @@
 <template>
 	<div class="home-wrap">
 		<div class="carousel-wrap mx-auto">
-			<div class="animate__animated animate__jello animate__delay-1s">
-				<div id="carousel" class="carousel slide carousel-fade bg-light mb-2" data-bs-ride="carousel">
+			<div class="animate__animated animate__jello animate__delay-1s mb-2">
+				<div id="carousel" class="carousel slide carousel-fade bg-light" data-bs-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item bg-light" data-bs-interval="3000" v-for="(item, key) in banner" :key="`banner_${key}`"
 							:class="{ 'active': !key }">
@@ -16,7 +16,7 @@
 					<small>我們不只是用相機拍照。我們帶到攝影中的是所有我們讀過的書、看過的電影、聽過的音樂、愛過的人。 — Ansel Adams</small>
 				</div>
 				<div class="col-5">
-					<div class="guide-card bg-white ms-auto py-4 px-5">
+					<div class="guide-card bg-white ms-auto position-relative py-4 px-5">
 						<h4 class="title d-inline-block lh-lg me-3">關於我</h4>
 						<h5 class="subtitle mb-3">about</h5>
 						<small class="d-block lh-lg">
@@ -77,7 +77,7 @@
 						<router-link :to="`work/${work.id}/${item.id}`" class="work-item">
 							<small class="d-block fw-bold mb-3">{{ item.date }} ｜ {{ item.title }}</small>
 							<div class="image-wrap position-relative bg-light mb-3">
-								<img :src="getImageUrl(work.id, item.image)" alt="item.title" class="image position-absolute">
+								<img :src="getImageUrl(work.id, item.image)" :alt="item.title" class="image position-absolute">
 							</div>
 						</router-link>
 					</li>
@@ -399,6 +399,7 @@ export default {
 	}
 	.guide-card {
 		margin-top: -50px;
+		z-index: 500;
 		.title {
 			letter-spacing: 1rem;
 		}

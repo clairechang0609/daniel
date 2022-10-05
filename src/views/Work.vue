@@ -1,36 +1,31 @@
 <template>
 	<div class="work-wrap pt-5 mx-auto">
-		<div class="row gx-5">
+		<div class="row gx-5 pb-4">
 			<div class="col-md-6">
 				<div class="title-card h-100">
 					<div class="title-card-body p-3">
-						<h3 class="title">travel</h3>
-						<h5 class="subtitle position-relative d-inline-block fs-7">旅行</h5>
+						<h3 class="title mb-2">{{ $route.params?.category }}</h3>
+						<h5 class="subtitle position-relative d-inline-block fs-7">{{ category.title }}</h5>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="work-content">
-					<small class="mb-2">2020 10月號</small>
-					<h4 class="mb-4">刊頭名稱</h4>
-					<p class="fs-7">
-						作者是誰：一些內容 <br /><br />
-						這是說明文字一段這是說明文字一段這是說明文字一段， <br />
-						說明文字二段說明文字二段說明文字二段，以上。 <br />
-					</p>
+					<small class="mb-2">{{ collection.date }}</small>
+					<h4 class="mb-4">{{ collection.masthead }}</h4>
+					<div class="d-flex flex-column fs-7">
+						<p>{{ collection.credit }}</p>
+						<p>{{ collection.title }}</p>
+						<p>{{ collection.subtitle }}</p>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="image-content mt-5">
-			<div class="image-example mb-4 bg-light w-100"></div>
-			<div class="image-example mb-4 bg-light w-100"></div>
-			<div class="image-example mb-4 bg-light w-100"></div>
-			<div class="image-example mb-4 bg-light w-100"></div>
-			<div class="image-example mb-4 bg-light w-100"></div>
-			<div class="image-example mb-4 bg-light w-100"></div>
-			<div class="image-example mb-4 bg-light w-100"></div>
-			<div class="image-example mb-4 bg-light w-100"></div>
-		</div>
+		<ul class="image-content pt-5">
+			<li class="image-wrap position-relative mb-5" :alt="item" v-for="item in collection.images" :key="item">
+				<img :src="getImageUrl(item)" class="position-relative image w-100">
+			</li>
+		</ul>
 		<div>
 			<router-link :to="{ name: 'Home' }" class="fs-8">
 				<i class="bi bi-arrow-left me-1"></i>back home
@@ -45,17 +40,48 @@ export default {
 	data() {
 		return {
 			data: {
+				people: {
+					title: '人物',
+					collections: [
+						{
+							id: 1,
+							masthead: '刊頭',
+							date: '2020 10月號',
+							title: '主標',
+							subtitle: '副標',
+							credit: '作者',
+							images: [
+								'dancer01.png',
+								'dancer02.png'
+							]
+						},
+						{
+							id: 2,
+							masthead: '刊頭',
+							date: '2020 10月號',
+							title: '主標',
+							subtitle: '副標',
+							credit: '作者',
+							images: [
+								'Flower01.png',
+								'Flower02.png'
+							]
+						}
+					]
+				},
 				travel: {
 					title: '旅行',
-					collection: [
+					collections: [
 						{
-							id: 4,
-							title: 'Ciao 潮旅',
-							subtitle: '2020 1月號',
-							content: [
-								'說明文字說明文字說明文字'
-							],
-							images: []
+							id: 1,
+							masthead: '刊頭',
+							date: '2020 10月號',
+							title: '主標',
+							subtitle: '副標',
+							credit: '作者',
+							images: [
+
+							]
 						}
 					]
 				}
@@ -67,12 +93,13 @@ export default {
 			return this.data[this.$route.params?.category];
 		},
 		collection() {
-			return this.category?.collection?.find(item => item.id === Number(this.$route.params.id));
+			return this.category?.collections?.find(item => item.id === Number(this.$route.params.id));
 		}
 	},
-	mounted() {
-	},
 	methods: {
+		getImageUrl(image) { // 取得圖片路徑
+			return require(`@/assets/image/${this.$route.params?.category}/${image}`);
+		}
 	}
 };
 </script>
@@ -96,7 +123,24 @@ export default {
 			transform: translateY(-50%);
 		}
 	}
-	.image-example {
-		padding-top: 75%;
+	.image-wrap {
+		box-shadow:0 1px 4px rgba($black, 0.3), 0 0 40px rgba($black, 0.1) inset;
+		&::before, &::after {
+			content: '';
+			position: absolute;
+			z-index: -1;
+			box-shadow:0 0 20px rgba($black, 0.8);
+			top: 50%;
+			bottom: 0;
+			left: 10px;
+			right: 10px;
+			-moz-border-radius: 100px / 10px;
+			border-radius: 100px / 10px;
+		}
+		&::after {
+			right: 10px;
+			left: auto;
+			transform: skew(8deg) rotate(3deg);
+		}
 	}
 </style>
