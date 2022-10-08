@@ -1,11 +1,10 @@
 <template>
 	<div class="home-wrap">
-		<div class="carousel-wrap mx-auto">
+		<div class="swiper-wrap mx-auto">
 			<div class="animate__animated animate__jello animate__delay-1s mb-2">
-				<div id="carousel" class="carousel slide carousel-fade bg-light" data-bs-ride="carousel">
-					<div class="carousel-inner">
-						<div class="carousel-item bg-light" data-bs-interval="3000" v-for="(item, key) in banner" :key="`banner_${key}`"
-							:class="{ 'active': !key }">
+				<div class="swiper swiper-container">
+					<div class="swiper-wrapper">
+						<div v-for="(item, key) in banner" :key="`banner_${key}`" class="swiper-slide bg-light">
 							<img :src="getImageUrl('banner', item)" alt="banner" class="banner">
 						</div>
 					</div>
@@ -94,13 +93,18 @@
 </template>
 
 <script>
-import bootstrapComponents from '@/mixin/bootstrap.js';
+import Swiper, {
+	Autoplay,
+	EffectCoverflow,
+	EffectCube,
+	Pagination,
+	Navigation
+} from 'swiper';
+
+Swiper.use([ Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation ]);
 
 export default {
 	name: 'Home',
-	mixins: [ bootstrapComponents ],
-	components: {
-	},
 	data() {
 		return {
 			banner: [
@@ -160,7 +164,7 @@ export default {
 						},
 						{
 							id: 8,
-							date: '2022 夏季號',
+							date: '2020 夏季號',
 							title: 'Infinite 台新無限季刊',
 							image: 'Reach01.png'
 						}
@@ -180,7 +184,7 @@ export default {
 							id: 2,
 							date: '2022 春季號',
 							title: 'Infinite 台新無限季刊',
-							image: 'TWclture01.png'
+							image: 'TWculture01.png'
 						},
 						{
 							id: 3,
@@ -326,10 +330,16 @@ export default {
 					title: '企劃編輯',
 					publish: [ '英語島雜誌' ]
 				}
-			]
+			],
+			swiperOptions: { // 輪播設定
+				slidesPerView: 1,
+				autoplay: true
+			},
+			swiper: ''
 		};
 	},
 	mounted() {
+		this.swiper = new Swiper('.swiper', this.swiperOptions);
 		window.addEventListener('scroll', this.showElement, true);
 	},
 	beforeUnmount() {
@@ -352,10 +362,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.carousel {
-		z-index: -1;
-	}
-	.carousel-item {
+	.swiper {
 		max-width: $container-width;
 		height: 650px;
 		.banner {

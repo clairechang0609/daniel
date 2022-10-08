@@ -5,25 +5,25 @@
 				<div class="title-card h-100">
 					<div class="title-card-body p-3">
 						<h3 class="title mb-2">{{ $route.params?.category }}</h3>
-						<h5 class="subtitle position-relative d-inline-block fs-7">{{ category.title }}</h5>
+						<h5 class="subtitle position-relative d-inline-block fs-7">{{ category?.title }}</h5>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="work-content">
-					<small class="mb-2">{{ collection.date }}</small>
-					<h4 class="mb-4">{{ collection.masthead }}</h4>
-					<div class="d-flex flex-column fs-7">
-						<p>{{ collection.credit }}</p>
-						<p>{{ collection.title }}</p>
-						<p>{{ collection.subtitle }}</p>
+					<small class="mb-1 d-block">{{ collection?.date }}</small>
+					<h4 class="mb-4">{{ collection?.masthead }}</h4>
+					<div class="mb-3">
+						<h6 class="mb-1">{{ collection?.title }}</h6>
+						<p class="fs-7">{{ collection?.subtitle }}</p>
 					</div>
+					<small class="d-block">{{ collection?.credit }}</small>
 				</div>
 			</div>
 		</div>
 		<ul class="image-content pt-5">
-			<li class="image-wrap position-relative mb-5" :alt="item" v-for="item in collection.images" :key="item">
-				<img :src="getImageUrl(item)" class="position-relative image w-100">
+			<li class="image-wrap mb-5" :alt="item" v-for="item in collection.images" :key="item">
+				<img :src="getImageUrl(item)" class="image w-100">
 			</li>
 		</ul>
 		<div>
@@ -441,11 +441,11 @@ export default {
 							subtitle: '台北表演藝術中心 Taipei Performing Arts Center',
 							credit: 'TEXT_Daniel PHOTO_OMA、大元建築師事務所',
 							images: [
-								'TPACi01.png',
-								'TPACi02.png',
-								'TPACi03.png',
-								'TPACi04.png',
-								'TPACi05.png'
+								'TPAC01.png',
+								'TPAC02.png',
+								'TPAC03.png',
+								'TPAC04.png',
+								'TPAC05.png'
 							]
 						}
 					]
@@ -488,24 +488,7 @@ export default {
 			transform: translateY(-50%);
 		}
 	}
-	.image-wrap {
-		box-shadow:0 1px 4px rgba($black, 0.3), 0 0 40px rgba($black, 0.1) inset;
-		&::before, &::after {
-			content: '';
-			position: absolute;
-			z-index: -1;
-			box-shadow:0 0 20px rgba($black, 0.8);
-			top: 50%;
-			bottom: 0;
-			left: 10px;
-			right: 10px;
-			-moz-border-radius: 100px / 10px;
-			border-radius: 100px / 10px;
-		}
-		&::after {
-			right: 10px;
-			left: auto;
-			transform: skew(8deg) rotate(3deg);
-		}
+	.image {
+		box-shadow:0 3px 7px rgba($black, 0.3), 0 0 30px rgba($black, 0.1);
 	}
 </style>
