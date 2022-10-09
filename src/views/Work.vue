@@ -1,7 +1,7 @@
 <template>
 	<div class="work-wrap pt-5 mx-auto">
 		<div class="row gx-5 pb-4">
-			<div class="col-md-6">
+			<div class="col-md-6 mb-4 mb-md-0">
 				<div class="title-card h-100">
 					<div class="title-card-body p-3">
 						<h3 class="title mb-2">{{ $route.params?.category }}</h3>
@@ -21,8 +21,8 @@
 				</div>
 			</div>
 		</div>
-		<ul class="image-content pt-5">
-			<li class="image-wrap mb-5" :alt="item" v-for="item in collection.images" :key="item">
+		<ul class="image-content pt-4 pt-md-5">
+			<li class="image-wrap mb-4 mb-md-5" :alt="item" v-for="item in collection.images" :key="item">
 				<img :src="getImageUrl(item)" class="image w-100">
 			</li>
 		</ul>

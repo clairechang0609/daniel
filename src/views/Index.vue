@@ -4,7 +4,7 @@
 		<div class="content">
 			<router-view></router-view>
 		</div>
-		<div class="footer text-center border-top border-dark py-5">
+		<div class="footer text-center border-top border-dark py-4 py-md-5">
 			<small>Copyright © daniel 2022, All rights reserved.</small>
 		</div>
 	</div>

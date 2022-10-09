@@ -11,13 +11,16 @@
 				</div>
 			</div>
 			<div class="row gx-5">
-				<div class="col-7">
+				<div class="col-md-7">
 					<small>我們不只是用相機拍照。我們帶到攝影中的是所有我們讀過的書、看過的電影、聽過的音樂、愛過的人。 — Ansel Adams</small>
 				</div>
-				<div class="col-5">
-					<div class="guide-card bg-white ms-auto position-relative py-4 px-5">
-						<h4 class="title d-inline-block lh-lg me-3">關於我</h4>
-						<h5 class="subtitle mb-3">about</h5>
+				<!-- about -->
+				<div class="col-md-5">
+					<div class="guide-card bg-white ms-auto position-relative py-4 px-md-5">
+						<div class="mb-3">
+							<h4 class="title d-sm-inline-block lh-lg me-3">關於我</h4>
+							<h5 class="subtitle">about</h5>
+						</div>
 						<small class="d-block lh-lg">
 							<span class="name fs-7 fw-bold">Daniel Chang 張景棠</span> <br />
 							Editor - Writer - Shutterbug <br />
@@ -30,46 +33,48 @@
 			</div>
 		</div>
 		<!-- experience -->
-		<div id="experience" class="experience-content row gx-5 mx-auto py-5">
-			<div class="col-sm-8">
-				<div class="mb-5">
-					<h2 class="title d-inline-block me-4">工作經歷</h2>
-					<h4 class="subtitle">experience</h4>
-				</div>
-				<ul class="lh-lg">
-					<li v-for="(item, index) in experience" :key="`experience_${index}`" class="mt-3">
-						<p class="fw-bold">
-							{{ item.during }}｜{{ item.company }} {{ item.title }}
-							<template v-if="item.titleList?.length">
-								<small class="d-block" v-for="(titleItem, key) in item.titleList" :key="`title_${index}_${key}`">
-									{{ titleItem.name }} {{ titleItem.during }}
+		<div id="experience" class="experience-content mx-auto py-3 py-sm-4 py-md-5">
+			<div class="row gx-5">
+				<div class="col-sm-8 mb-3 mb-sm-0">
+					<div class="mb-3 mb-md-5">
+						<h4 class="title lh-lg me-4 fs-md-2">工作經歷</h4>
+						<h5 class="subtitle fs-md-4">experience</h5>
+					</div>
+					<ul class="lh-lg">
+						<li v-for="(item, index) in experience" :key="`experience_${index}`" class="mt-3">
+							<p class="fw-bold fs-7">
+								{{ item.during }}｜{{ item.company }} {{ item.title }}
+								<template v-if="item.titleList?.length">
+									<small class="d-block" v-for="(titleItem, key) in item.titleList" :key="`title_${index}_${key}`">
+										{{ titleItem.name }} {{ titleItem.during }}
+									</small>
+								</template>
+							</p>
+							<div class="d-flex flex-column ms-sm-3 mt-2">
+								<small v-for="(publishItem, key) in item.publish" :key="`publish_${index}_${key}`" class="mt-1">
+									- {{ publishItem }}
 								</small>
-							</template>
-						</p>
-						<div class="d-flex flex-column ms-3 mt-2">
-							<small v-for="(publishItem, key) in item.publish" :key="`publish_${index}_${key}`" class="mt-1">
-								- {{ publishItem }}
-							</small>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<div class="col-sm-4 align-self-end">
-				<div class="image-wrap bg-light mb-4"></div>
-				<div class="text-end mb-2">
-					<a href="#" class="profile-link fs-7 ms-auto py-1">
-						profile<i class="bi bi-arrow-right ms-1"></i>
-					</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-4 align-self-end">
+					<div class="image-wrap bg-light mb-2 mb-md-4"></div>
+					<div class="text-end mb-2">
+						<a href="#" class="profile-link fs-7 ms-auto py-1">
+							profile<i class="bi bi-arrow-right ms-1"></i>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-- works -->
-		<div id="work" class="work-content pt-5">
-			<div v-for="work in works" :key="work.id" class="work-wrap pb-5">
-				<h3 class="mb-5 work">
-					<span class="title">{{ work.id }}</span>
-					<small class="subtitle fs-6 ms-3 fw-normal">{{ work.title }}</small>
-				</h3>
+		<div id="work" class="work-content pt-4 pt-md-5">
+			<div v-for="work in works" :key="work.id" class="work-wrap pb-3 pb-md-5">
+				<div class="mb-4 mb-md-5">
+					<h3 class="title lh-lg d-md-inline-block">{{ work.id }}</h3>
+					<h6 class="subtitle fs-6 ms-md-3 fw-normal">{{ work.title }}</h6>
+				</div>
 				<ul class="row">
 					<li v-for="item in work.collections" :key="`work_${work.id}_${ item.id}`"
 						class="work col-md-6 col-lg-4 mb-4">
@@ -86,7 +91,8 @@
 		<!-- contact -->
 		<div id="contact" class="contact-content bg-light bg-opacity-50 text-center position-relative mx-auto mt-5 p-5">
 			<h3 class="title position-absolute">contact</h3>
-			<p class="mb-2">專題企劃、採訪撰稿歡迎來信<i class="bi bi-envelope ms-1"></i></p>
+			<p class="mb-2">專題企劃、採訪撰稿歡迎來信</p>
+			<i class="bi bi-envelope d-block mb-2"></i>
 			<a href="mailto:danielchang0281@gmail.com" class="email fs-7" target="_blank" rel="noreferrer noopener">danielchang0281@gmail.com</a>
 		</div>
 	</div>
@@ -332,6 +338,7 @@ export default {
 				}
 			],
 			swiperOptions: { // 輪播設定
+				loop: true,
 				slidesPerView: 1,
 				autoplay: true
 			},
@@ -364,10 +371,19 @@ export default {
 <style lang="scss" scoped>
 	.swiper {
 		max-width: $container-width;
-		height: 650px;
+		height: 250px;
+		@include media-sm {
+			height: 350px;
+		}
+		@include media-md {
+			height: 480px;
+		}
+		@include media-lg {
+			height: 650px;
+		}
 		.banner {
 			width: 100%;
-			height: 650px;
+			height: 100%;
 			object-fit: cover;
 		}
 	}
@@ -405,8 +421,10 @@ export default {
 		}
 	}
 	.guide-card {
-		margin-top: -50px;
-		z-index: 500;
+		@include media-md {
+			margin-top: -50px;
+			z-index: 500;
+		}
 		.title {
 			letter-spacing: 1rem;
 		}
