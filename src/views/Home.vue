@@ -239,6 +239,24 @@ export default {
 							date: '2021 Vol.08',
 							title: 'terroir 肥沃台灣',
 							image: 'Sea01.png'
+						},
+						{
+							id: 7,
+							date: '2018-2019 漫遊者',
+							title: 'tigertales台灣虎航機上誌',
+							image: 'Flaneur01.png'
+						},
+						{
+							id: 8,
+							date: '2018-2019 探索台灣',
+							title: 'tigertales台灣虎航機上誌',
+							image: 'Taiwan01.png'
+						},
+						{
+							id: 9,
+							date: '2018-2019 封面故事',
+							title: 'tigertales台灣虎航機上誌',
+							image: 'Cover01.png'
 						}
 					]
 				},
@@ -260,7 +278,7 @@ export default {
 						},
 						{
 							id: 3,
-							date: '2020 7季號',
+							date: '2020 7月號',
 							title: '合庫樂活理財季刊',
 							image: 'Chimei01.png'
 						},
@@ -293,6 +311,24 @@ export default {
 							date: '2019 1月號',
 							title: 'Core Interior 空間',
 							image: 'TPAC01.png'
+						}
+					]
+				},
+				{
+					id: 'album',
+					title: '攝影',
+					collections: [
+						{
+							id: 1,
+							date: '2018-2022',
+							title: '自然',
+							image: 'Nature01.jpg'
+						},
+						{
+							id: 2,
+							date: '2018-2022',
+							title: '城市',
+							image: 'City01.jpg'
 						}
 					]
 				}

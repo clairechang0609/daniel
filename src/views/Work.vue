@@ -165,7 +165,8 @@ export default {
 								'Handmade11.png',
 								'Handmade12.png',
 								'Handmade13.png',
-								'Handmade14.png'
+								'Handmade14.png',
+								'Handmade15.png'
 							]
 						},
 						{
@@ -183,7 +184,8 @@ export default {
 								'TWculture05.png',
 								'TWculture06.png',
 								'TWculture07.png',
-								'TWculture08.png'
+								'TWculture08.png',
+								'TWculture09.png'
 							]
 						},
 						{
@@ -201,7 +203,9 @@ export default {
 								'Local05.png',
 								'Local06.png',
 								'Local07.png',
-								'Local08.png'
+								'Local08.png',
+								'Local09.png',
+								'Local10.png'
 							]
 						}
 					]
@@ -321,7 +325,69 @@ export default {
 							images: [
 								'Sea01.png',
 								'Sea02.png',
-								'Sea03.png'
+								'Sea03.png',
+								'Sea04.png'
+							]
+						},
+						{
+							id: 7,
+							masthead: 'tigertales 台灣虎航機上誌',
+							date: '2018-2019',
+							title: '漫遊者',
+							subtitle: '',
+							credit: 'TEXT_Daniel PHOTO_Daniel、陳宇威、OMO7旭川、Shutterstock',
+							images: [
+								'Flaneur01.png',
+								'Flaneur02.png',
+								'Flaneur03.png',
+								'Flaneur04.png',
+								'Flaneur05.png'
+							]
+						},
+						{
+							id: 8,
+							masthead: 'tigertales 台灣虎航機上誌',
+							date: '2018-2019',
+							title: '探索台灣',
+							subtitle: '',
+							credit: 'TEXT_Daniel PHOTO_hazy、鵲兒喜、大藝埕、國立台灣美術館、蔡勝義、美可特品牌企劃設計',
+							images: [
+								'Taiwan01.png',
+								'Taiwan02.png',
+								'Taiwan03.png',
+								'Taiwan04.png',
+								'Taiwan05.png',
+								'Taiwan06.png',
+								'Taiwan07.png',
+								'Taiwan08.png',
+								'Taiwan09.png',
+								'Taiwan10.png',
+								'Taiwan11.png',
+								'Taiwan12.png'
+							]
+						},
+						{
+							id: 9,
+							masthead: 'tigertales 台灣虎航機上誌',
+							date: '2018-2019',
+							title: '封面故事',
+							subtitle: '',
+							credit: 'TEXT_Joe PHOTO_旭川市觀光科、岩手縣觀光科、豪斯登堡、Shutterstock',
+							images: [
+								'Cover01.png',
+								'Cover02.png',
+								'Cover03.png',
+								'Cover04.png',
+								'Cover05.png',
+								'Cover06.png',
+								'Cover07.png',
+								'Cover08.png',
+								'Cover09.png',
+								'Cover10.png',
+								'Cover11.png',
+								'Cover12.png',
+								'Cover13.png',
+								'Cover14.png'
 							]
 						}
 					]
@@ -345,7 +411,8 @@ export default {
 								'collect06.png',
 								'collect07.png',
 								'collect08.png',
-								'collect09.png'
+								'collect09.png',
+								'collect10.png'
 							]
 						},
 						{
@@ -364,7 +431,7 @@ export default {
 						{
 							id: 3,
 							masthead: '合庫樂活理財季刊',
-							date: '2020 7季號',
+							date: '2020 7月號',
 							title: '我為琴狂',
 							subtitle: '奇美博物館的名琴饗宴',
 							credit: 'TEXT_Daniel PHOTO_蔡勝義',
@@ -412,7 +479,8 @@ export default {
 								'Home10.png',
 								'Home11.png',
 								'Home12.png',
-								'Home13.png'
+								'Home13.png',
+								'Home14.png'
 							]
 						},
 						{
@@ -430,7 +498,8 @@ export default {
 								'texture05.png',
 								'texture06.png',
 								'texture07.png',
-								'texture08.png'
+								'texture08.png',
+								'texture09.png'
 							]
 						},
 						{
@@ -446,6 +515,65 @@ export default {
 								'TPAC03.png',
 								'TPAC04.png',
 								'TPAC05.png'
+							]
+						}
+					]
+				},
+				album: {
+					title: '攝影',
+					collections: [
+						{
+							id: 1,
+							masthead: '',
+							date: '2018-2022',
+							title: '自然',
+							subtitle: 'Nature',
+							credit: '',
+							images: [
+								'Nature01.jpg',
+								'Nature02.jpg',
+								'Nature03.jpg',
+								'Nature04.jpg',
+								'Nature05.jpg',
+								'Nature06.jpg',
+								'Nature07.jpg',
+								'Nature08.jpg',
+								'Nature09.jpg',
+								'Nature10.jpg',
+								'Nature11.jpg',
+								'Nature12.jpg',
+								'Nature13.jpg',
+								'Nature14.jpg',
+								'Nature15.jpg',
+								'Nature16.jpg'
+							]
+						},
+						{
+							id: 2,
+							masthead: '',
+							date: '2018-2022',
+							title: '城市',
+							subtitle: 'City',
+							credit: '',
+							images: [
+								'City01.jpg',
+								'City02.jpg',
+								'City03.jpg',
+								'City04.jpg',
+								'City05.jpg',
+								'City06.jpg',
+								'City07.jpg',
+								'City08.jpg',
+								'City09.jpg',
+								'City10.jpg',
+								'City11.jpg',
+								'City12.jpg',
+								'City13.jpg',
+								'City14.jpg',
+								'City15.jpg',
+								'City16.jpg',
+								'City17.jpg',
+								'City18.jpg'
 							]
 						}
 					]
@@ -489,6 +617,6 @@ export default {
 		}
 	}
 	.image {
-		box-shadow:0 3px 7px rgba($black, 0.3), 0 0 30px rgba($black, 0.1);
+		filter: drop-shadow(0 3px 4px rgba($black, 0.3));
 	}
 </style>
