@@ -1,12 +1,10 @@
 <template>
 	<div class="home-wrap">
 		<div class="swiper-wrap mx-auto">
-			<div class="animate__animated animate__jello animate__delay-1s mb-2">
-				<div class="swiper swiper-container">
-					<div class="swiper-wrapper">
-						<div v-for="(item, key) in banner" :key="`banner_${key}`" class="swiper-slide bg-light">
-							<img :src="getImageUrl('banner', item)" alt="banner" class="banner">
-						</div>
+			<div class="swiper swiper-container mb-2">
+				<div class="swiper-wrapper">
+					<div v-for="(item, key) in banner" :key="`banner_${key}`" class="swiper-slide bg-light">
+						<img :src="getImageUrl('banner', item)" alt="banner" class="banner">
 					</div>
 				</div>
 			</div>
@@ -197,6 +195,36 @@ export default {
 							date: '2021 夏季號',
 							title: 'Infinite 台新無限季刊',
 							image: 'Local01.png'
+						},
+						{
+							id: 4,
+							date: 'Vol.07 食物Ｘ設計',
+							title: 'Inspire 意念圖誌',
+							image: 'food01.png'
+						},
+						{
+							id: 5,
+							date: 'Vol.08 旅行Ｘ設計',
+							title: 'Inspire 意念圖誌',
+							image: 'travel01.png'
+						},
+						{
+							id: 6,
+							date: 'Vol.09 運動Ｘ設計',
+							title: 'Inspire 意念圖誌',
+							image: 'sport01.png'
+						},
+						{
+							id: 7,
+							date: 'Vol.10 電影Ｘ設計',
+							title: 'Inspire 意念圖誌',
+							image: 'movie01.png'
+						},
+						{
+							id: 8,
+							date: 'Vol.11 音樂Ｘ設計',
+							title: 'Inspire 意念圖誌',
+							image: 'music01.png'
 						}
 					]
 				},
@@ -521,7 +549,8 @@ export default {
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
-				box-shadow: 0 0.35rem 0.35rem -0.25rem rgba($black, 0.2);
+				// box-shadow: 0 0.35rem 0.35rem -0.25rem rgba($black, 0.2);
+				filter: drop-shadow(0 0.25rem 0.15rem rgba($black, 0.2));
 				transition: 0.8s;
 			}
 		}
