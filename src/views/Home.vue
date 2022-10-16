@@ -8,7 +8,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row gx-5">
+			<div class="row gx-md-5">
 				<div class="col-md-7">
 					<small>我們不只是用相機拍照。我們帶到攝影中的是所有我們讀過的書、看過的電影、聽過的音樂、愛過的人。 — Ansel Adams</small>
 				</div>
@@ -32,7 +32,7 @@
 		</div>
 		<!-- experience -->
 		<div id="experience" class="experience-content mx-auto py-3 py-sm-4 py-md-5">
-			<div class="row gx-5">
+			<div class="row gx-md-5">
 				<div class="col-sm-8 mb-3 mb-sm-0">
 					<div class="mb-3 mb-md-5">
 						<h4 class="title lh-lg me-4 fs-md-2">工作經歷</h4>
