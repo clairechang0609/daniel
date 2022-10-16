@@ -8,7 +8,7 @@
 			</h1>
 			<ul class="menu">
 				<li class="px-3" v-for="item in menuList" :key="item.id">
-					<router-link :to="{ hash: `#${item.id}` }" class="menu-item position-relative fw-bold text-decoration-none py-2">{{ item.name }}</router-link>
+					<router-link :to="{ name: 'Home', hash: `#${item.id}` }" class="menu-item position-relative fw-bold text-decoration-none py-2">{{ item.name }}</router-link>
 				</li>
 			</ul>
 		</div>
