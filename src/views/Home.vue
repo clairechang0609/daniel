@@ -1,13 +1,12 @@
 <template>
 	<div class="home-wrap">
 		<div class="swiper-wrap mx-auto">
-			<div class="swiper swiper-container mb-2">
-				<div class="swiper-wrapper">
-					<div v-for="(item, key) in banner" :key="`banner_${key}`" class="swiper-slide bg-light">
-						<img :src="getImageUrl('banner', item)" alt="banner" class="banner">
-					</div>
-				</div>
-			</div>
+			<Swiper class="swiper mb-2" :loop="true" :slides-per-view="1"
+				:autoplay="{ delay: 3000, disableOnInteraction: false }">
+				<SwiperSlide v-for="(item, key) in banner" :key="`banner_${key}`" class="bg-light">
+					<img :src="getImageUrl('banner', item)" alt="banner" class="banner">
+				</SwiperSlide>
+			</Swiper>
 			<div class="row gx-md-5">
 				<div class="col-md-7">
 					<small>我們不只是用相機拍照。我們帶到攝影中的是所有我們讀過的書、看過的電影、聽過的音樂、愛過的人。 — Ansel Adams</small>
@@ -68,18 +67,18 @@
 		</div>
 		<!-- works -->
 		<div id="work" class="work-content pt-4 pt-md-5">
-			<div v-for="work in works" :key="work.id" class="work-wrap pb-3 pb-md-5">
+			<div v-for="(work, key) in works" :key="key" class="work-wrap pb-3 pb-md-5">
 				<div class="mb-4 mb-md-5">
-					<h3 class="title lh-lg d-md-inline-block">{{ work.id }}</h3>
+					<h3 class="title lh-lg d-md-inline-block">{{ key }}</h3>
 					<h6 class="subtitle fs-6 ms-md-3 fw-normal">{{ work.title }}</h6>
 				</div>
 				<ul class="row">
-					<li v-for="item in work.collections" :key="`work_${work.id}_${ item.id}`"
+					<li v-for="item in work.collections" :key="`work_${key}_${item.id}`"
 						class="work col-md-6 col-lg-4 mb-4">
-						<router-link :to="`work/${work.id}/${item.id}`" class="work-item">
-							<small class="d-block fw-bold mb-3">{{ item.date }} ｜ {{ item.title }}</small>
+						<router-link :to="`work/${key}/${item.id}`" class="work-item">
+							<small class="d-block fw-bold mb-3">{{ item.date }} ｜ {{ item.masthead }}</small>
 							<div class="image-wrap position-relative bg-light mb-3">
-								<img :src="getImageUrl(work.id, item.image)" :alt="item.title" class="image position-absolute">
+								<img :src="getImageUrl(key, item.images[0])" :alt="item.masthead" class="image position-absolute">
 							</div>
 						</router-link>
 					</li>
@@ -97,337 +96,98 @@
 </template>
 
 <script>
-import Swiper, {
-	Autoplay,
-	EffectCoverflow,
-	EffectCube,
-	Pagination,
-	Navigation
-} from 'swiper';
+import { onMounted, onBeforeUnmount } from 'vue';
+import defaultStore from '@/store/index';
+import SwiperCore, { Autoplay, Pagination, Navigation, Mousewheel } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 
-Swiper.use([ Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation ]);
+SwiperCore.use([ Autoplay, Pagination, Navigation, Mousewheel ]);
 
 export default {
 	name: 'Home',
-	data() {
-		return {
-			banner: [
-				'banner-1.jpg',
-				'banner-2.jpg',
-				'banner-3.jpg',
-				'banner-4.jpg',
-				'banner-5.jpg',
-				'banner-6.jpg'
-			],
-			works: [ // 作品
-				{
-					id: 'people',
-					title: ' 人物',
-					collections: [
-						{
-							id: 1,
-							date: '2019 冬季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'dancer01.png'
-						},
-						{
-							id: 2,
-							date: '2020 秋季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'Flower01.png'
-						},
-						{
-							id: 3,
-							date: '2020 春季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'tiger01.png'
-						},
-						{
-							id: 4,
-							date: '2021 冬季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'Louisa01.png'
-						},
-						{
-							id: 5,
-							date: '2021 夏季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'Atitan01.png'
-						},
-						{
-							id: 6,
-							date: '2020 冬季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'Celia01.png'
-						},
-						{
-							id: 7,
-							date: '2022 秋季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'PoChen01.png'
-						},
-						{
-							id: 8,
-							date: '2020 夏季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'Reach01.png'
-						}
-					]
-				},
-				{
-					id: 'features',
-					title: '專題',
-					collections: [
-						{
-							id: 1,
-							date: '2022 秋季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'Handmade01.png'
-						},
-						{
-							id: 2,
-							date: '2022 春季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'TWculture01.png'
-						},
-						{
-							id: 3,
-							date: '2021 夏季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'Local01.png'
-						},
-						{
-							id: 4,
-							date: 'Vol.07 食物Ｘ設計',
-							title: 'Inspire 意念圖誌',
-							image: 'food01.png'
-						},
-						{
-							id: 5,
-							date: 'Vol.08 旅行Ｘ設計',
-							title: 'Inspire 意念圖誌',
-							image: 'travel01.png'
-						},
-						{
-							id: 6,
-							date: 'Vol.09 運動Ｘ設計',
-							title: 'Inspire 意念圖誌',
-							image: 'sport01.png'
-						},
-						{
-							id: 7,
-							date: 'Vol.10 電影Ｘ設計',
-							title: 'Inspire 意念圖誌',
-							image: 'movie01.png'
-						},
-						{
-							id: 8,
-							date: 'Vol.11 音樂Ｘ設計',
-							title: 'Inspire 意念圖誌',
-							image: 'music01.png'
-						}
-					]
-				},
-				{
-					id: 'travel',
-					title: '旅行',
-					collections: [
-						{
-							id: 1,
-							date: '2020 1月號',
-							title: 'Ciao 潮旅',
-							image: 'Hokkaido01.png'
-						},
-						{
-							id: 2,
-							date: '2019 7月號',
-							title: 'Ciao 潮旅',
-							image: 'Scotland01.png'
-						},
-						{
-							id: 3,
-							date: '2020 秋季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'Island01.png'
-						},
-						{
-							id: 4,
-							date: '2020 4月號',
-							title: 'Ciao 潮旅',
-							image: 'Old01.png'
-						},
-						{
-							id: 5,
-							date: '2020 3月號',
-							title: 'Ciao 潮旅',
-							image: 'CityArch01.png'
-						},
-						{
-							id: 6,
-							date: '2021 Vol.08',
-							title: 'terroir 肥沃台灣',
-							image: 'Sea01.png'
-						},
-						{
-							id: 7,
-							date: '2018-2019 漫遊者',
-							title: 'tigertales台灣虎航機上誌',
-							image: 'Flaneur01.png'
-						},
-						{
-							id: 8,
-							date: '2018-2019 探索台灣',
-							title: 'tigertales台灣虎航機上誌',
-							image: 'Taiwan01.png'
-						},
-						{
-							id: 9,
-							date: '2018-2019 封面故事',
-							title: 'tigertales台灣虎航機上誌',
-							image: 'Cover01.png'
-						}
-					]
-				},
-				{
-					id: 'collection',
-					title: '收藏',
-					collections: [
-						{
-							id: 1,
-							date: '2021 冬季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'collect01.png'
-						},
-						{
-							id: 2,
-							date: '2021 1月號',
-							title: '合庫樂活理財季刊',
-							image: 'poster01.png'
-						},
-						{
-							id: 3,
-							date: '2020 7月號',
-							title: '合庫樂活理財季刊',
-							image: 'Chimei01.png'
-						},
-						{
-							id: 4,
-							date: '2019 10月號',
-							title: '合庫樂活理財季刊',
-							image: 'coffeejoe01.png'
-						}
-					]
-				},
-				{
-					id: 'architecture',
-					title: '建築',
-					collections: [
-						{
-							id: 1,
-							date: '2022 夏季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'Home01.png'
-						},
-						{
-							id: 2,
-							date: '2021 秋季號',
-							title: 'Infinite 台新無限季刊',
-							image: 'texture01.png'
-						},
-						{
-							id: 3,
-							date: '2019 1月號',
-							title: 'Core Interior 空間',
-							image: 'TPAC01.png'
-						}
-					]
-				},
-				{
-					id: 'album',
-					title: '攝影',
-					collections: [
-						{
-							id: 1,
-							date: '2018-2022',
-							title: '自然',
-							image: 'Nature01.jpg'
-						},
-						{
-							id: 2,
-							date: '2018-2022',
-							title: '城市',
-							image: 'City01.jpg'
-						}
-					]
-				}
-			],
-			experience: [ // 經歷
-				{
-					during: '2019-now',
-					company: '華訊事業股份有限公司',
-					title: '副總編輯',
-					titleList: [
-						{
-							during: '2022-now',
-							name: '代編部 副總編輯'
-						},
-						{
-							during: '2019-2022',
-							name: '代編部 主編'
-						}
-					],
-					publish: [
-						'Infinite 台新無限季刊（台新銀行無限卡會員刊物）',
-						'合庫樂活理財季刊（合作金庫理財季刊）',
-						'terroir 肥沃台灣（台灣肥料企業形象刊物）',
-						'dawn 曙光季刊（國立臺東生活美學館）',
-						'Ciao 潮旅（華訊與中華航空異業合作旅遊刊物）'
-					]
-				},
-				{
-					during: '2016-2019',
-					company: '意念文創股份有限公司',
-					title: '主編',
-					publish: [
-						'tigertales 台灣虎航機上雜誌',
-						'Inspire 意念圖誌',
-						'My Plus 加分誌'
-					]
-				},
-				{
-					during: '2015-2016',
-					company: '世界公民文化中心',
-					title: '企劃編輯',
-					publish: [ '英語島雜誌' ]
-				}
-			],
-			swiperOptions: { // 輪播設定
-				loop: true,
-				slidesPerView: 1,
-				autoplay: true
+	components: {
+		Swiper,
+		SwiperSlide
+	},
+	setup() {
+		const { works } = defaultStore();
+		const banner = [
+			'banner-1.jpg',
+			'banner-2.jpg',
+			'banner-3.jpg',
+			'banner-4.jpg',
+			'banner-5.jpg',
+			'banner-6.jpg'
+		];
+		const experience = [ // 經歷
+			{
+				during: '2019-now',
+				company: '華訊事業股份有限公司',
+				title: '副總編輯',
+				titleList: [
+					{
+						during: '2022-now',
+						name: '代編部 副總編輯'
+					},
+					{
+						during: '2019-2022',
+						name: '代編部 主編'
+					}
+				],
+				publish: [
+					'Infinite 台新無限季刊（台新銀行無限卡會員刊物）',
+					'合庫樂活理財季刊（合作金庫理財季刊）',
+					'terroir 肥沃台灣（台灣肥料企業形象刊物）',
+					'dawn 曙光季刊（國立臺東生活美學館）',
+					'Ciao 潮旅（華訊與中華航空異業合作旅遊刊物）'
+				]
 			},
-			swiper: ''
-		};
-	},
-	mounted() {
-		this.swiper = new Swiper('.swiper', this.swiperOptions);
-		window.addEventListener('scroll', this.showElement, true);
-	},
-	beforeUnmount() {
-		window.removeEventListener('scroll', this.showElement);
-	},
-	methods: {
-		showElement() { // 顯示內容動態效果
+			{
+				during: '2016-2019',
+				company: '意念文創股份有限公司',
+				title: '主編',
+				publish: [
+					'tigertales 台灣虎航機上雜誌',
+					'Inspire 意念圖誌',
+					'My Plus 加分誌'
+				]
+			},
+			{
+				during: '2015-2016',
+				company: '世界公民文化中心',
+				title: '企劃編輯',
+				publish: [ '英語島雜誌' ]
+			}
+		];
+
+		const showElement = () => { // 顯示內容動態效果
 			const workItems = document.querySelectorAll('.work');
 			workItems.forEach(item => {
 				if ((item.offsetTop + 50) < (window.scrollY + window.innerHeight)) {
 					item.classList.add('active');
 				}
 			});
-		},
-		getImageUrl(category, image) { // 取得圖片路徑
+		};
+		const getImageUrl = (category, image) => { // 取得圖片路徑
 			return require(`@/assets/image/${category}/${image}`);
-		}
+		};
+
+		onMounted(() => {
+			window.addEventListener('scroll', showElement, true);
+		});
+
+		onBeforeUnmount(() => {
+			window.removeEventListener('scroll', showElement);
+		});
+
+		return {
+			banner,
+			experience,
+			works,
+			// methods
+			showElement,
+			getImageUrl
+		};
 	}
 };
 </script>
