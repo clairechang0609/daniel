@@ -1,12 +1,7 @@
 <template>
 	<div class="home-wrap">
 		<div class="swiper-wrap mx-auto">
-			<Swiper class="swiper mb-2" :loop="true" :slides-per-view="1"
-				:autoplay="{ delay: 3000, disableOnInteraction: false }">
-				<SwiperSlide v-for="(item, key) in banner" :key="`banner_${key}`" class="bg-light">
-					<img :src="getImageUrl('banner', item)" alt="banner" class="banner">
-				</SwiperSlide>
-			</Swiper>
+			<Banner />
 			<div class="row gx-md-5">
 				<div class="col-md-7">
 					<small>我們不只是用相機拍照。我們帶到攝影中的是所有我們讀過的書、看過的電影、聽過的音樂、愛過的人。 — Ansel Adams</small>
@@ -98,27 +93,15 @@
 <script>
 import { onMounted, onBeforeUnmount } from 'vue';
 import defaultStore from '@/store/index';
-import SwiperCore, { Autoplay, Pagination, Navigation, Mousewheel } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-
-SwiperCore.use([ Autoplay, Pagination, Navigation, Mousewheel ]);
+import Banner from '@/components/Banner';
 
 export default {
 	name: 'Home',
 	components: {
-		Swiper,
-		SwiperSlide
+		Banner
 	},
 	setup() {
-		const { works } = defaultStore();
-		const banner = [
-			'banner-1.jpg',
-			'banner-2.jpg',
-			'banner-3.jpg',
-			'banner-4.jpg',
-			'banner-5.jpg',
-			'banner-6.jpg'
-		];
+		const { works, getImageUrl } = defaultStore();
 		const experience = [ // 經歷
 			{
 				during: '2019-now',
@@ -168,9 +151,6 @@ export default {
 				}
 			});
 		};
-		const getImageUrl = (category, image) => { // 取得圖片路徑
-			return require(`@/assets/image/${category}/${image}`);
-		};
 
 		onMounted(() => {
 			window.addEventListener('scroll', showElement, true);
@@ -181,7 +161,7 @@ export default {
 		});
 
 		return {
-			banner,
+			// data
 			experience,
 			works,
 			// methods
@@ -193,24 +173,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.swiper {
-		max-width: $container-width;
-		height: 250px;
-		@include media-sm {
-			height: 350px;
-		}
-		@include media-md {
-			height: 480px;
-		}
-		@include media-lg {
-			height: 650px;
-		}
-		.banner {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-	}
 	.subtitle {
 		position: relative;
 		display: inline-block;
@@ -309,7 +271,6 @@ export default {
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
-				// box-shadow: 0 0.35rem 0.35rem -0.25rem rgba($black, 0.2);
 				filter: drop-shadow(0 0.25rem 0.15rem rgba($black, 0.2));
 				transition: 0.8s;
 			}

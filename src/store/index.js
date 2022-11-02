@@ -669,5 +669,10 @@ export default defineStore('work', {
 				]
 			}
 		}
-	})
+	}),
+	actions: {
+		getImageUrl(category, image) {
+			return require(`@/assets/image/${category}/${image}`);
+		}
+	}
 });

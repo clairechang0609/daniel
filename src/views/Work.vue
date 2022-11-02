@@ -23,7 +23,7 @@
 		</div>
 		<ul class="image-content pt-4 pt-md-5">
 			<li class="image-wrap mb-4 mb-md-5" :alt="item" v-for="item in collection.images" :key="item">
-				<img :src="getImageUrl(item)" class="image w-100">
+				<img :src="getImageUrl(route.params?.category, item)" class="image w-100">
 			</li>
 		</ul>
 		<div>
@@ -43,18 +43,15 @@ export default {
 	name: 'Work',
 	setup() {
 		const route = useRoute();
-		const { works } = defaultStore();
+		const { works, getImageUrl } = defaultStore();
 		const category = computed(() => works[route.params?.category]);
 		const collection = computed(() => {
 			return category.value?.collections?.find(item => item.id === Number(route.params?.id));
 		});
 
-		const getImageUrl = image => { // 取得圖片路徑
-			return require(`@/assets/image/${route.params?.category}/${image}`);
-		};
-
 		return {
 			// data
+			route,
 			works,
 			// computed
 			category,
